@@ -20,15 +20,18 @@ jobs:
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
+        with:
+          build-root-directory: inspect-1.21.11
 
       - name: Make gradlew executable
-        run: chmod +x ./gradlew
+        run: chmod +x inspect-1.21.11/gradlew
 
       - name: Build
         run: ./gradlew build
+        working-directory: inspect-1.21.11
 
       - name: Upload mod jar
         uses: actions/upload-artifact@v4
         with:
           name: inspectitems-1.21.11
-          path: build/libs/*.jar
+          path: inspect-1.21.11/build/libs/*.jar
